@@ -12,19 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
     - name: Set Git config
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-          
     - name: Merge master back to develop
       run: |
           git fetch --unshallow
           git checkout develop
           git pull
-          git merge --no-ff master -m "Merge branch 'master' into develop"
-          git push
+          git merge --no-ff master -m "Merge branch 'master' into develop" && git push
           
   create_pull_request:
     needs: merge
